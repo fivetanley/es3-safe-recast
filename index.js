@@ -89,7 +89,7 @@ var ES6Safe = Visitor.extend({
   visitMemberExpression: function(node) {
     var property = node.property;
     var newNode;
-    if (namedTypes.Identifier.check(property) && identifierToLiteral[property.name]) {
+    if (namedTypes.Identifier.check(property) && identifierToLiteral[property.name] && !node.computed){
       newNode = builders.memberExpression(node.object, builders.literal(property.name), true);
     } else {
       newNode = node;

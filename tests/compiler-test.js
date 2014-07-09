@@ -22,6 +22,17 @@ describe('parses es6-module-syntax without error', function() {
   });
 });
 
+describe('computed names for unreserved keywords', function(){
+  // The case of var toString = this["toString"]();
+  // thing[toString]
+  it('works for toString', function(){
+    var path = './tests/fixtures/default-class-with-tostring';
+    var actual = compiler.compile(readFileSync(path + '/input.js'));
+    var expected = readFileSync(path + '/output.js');
+    astEqual(actual, expected, 'expected input.js and output.js to match');
+  })
+});
+
 
 describe('object member', function() {
   it('works', function() {
